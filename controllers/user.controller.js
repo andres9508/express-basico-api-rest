@@ -1,31 +1,45 @@
-import { response } from "express";
+import { response, request } from "express";
 // loscontroladores son solo funciones q se exportan para ser usadas por la ruta
 
-export const getUser = (req, res = response) => {
+export const getUser = (req = request, res = response) => {
+  const { name, edad, userid, limit = 10, page = 1 } = req.query;
+
   res.json({
     mss: "users GET success- controller",
+    userid,
+    name,
+    edad,
+    limit,
+    page,
   });
 };
 
-export const putUser = (req, res=response) => {
+//obteniendo datos de los prametros
+export const putUser = (req = request, res = response) => {
+  const id = req.params.id;
   res.json({
     mss: "users PUT success - controller",
+    id,
   });
 };
 
-export const postUser = (req, res=response) => {
+//obteniendo datos del json en post
+export const postUser = (req = request, res = response) => {
+  const { nombre, edad } = req.body;
   res.json({
     mss: "users POST success - controller",
+    nombre,
+    edad,
   });
 };
 
-export const patchUser = (req, res=response) => {
+export const patchUser = (req, res = response) => {
   res.json({
     mss: "users PATCH success - controller",
   });
 };
 
-export const deleteUser = (req, res=response) => {
+export const deleteUser = (req, res = response) => {
   res.json({
     mss: "users DELETE  - controller",
   });
