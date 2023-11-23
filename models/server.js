@@ -1,4 +1,7 @@
 import express from "express";
+import cors from "cors";
+import users from "../routes/users.router.js";
+import admin from "../routes/admin.route..js";
 
 class Server {
   constructor() {
@@ -12,13 +15,15 @@ class Server {
   }
 
   middlewares() {
-    this.app.use(express.static('public'));//directorio publico
+    //CORS
+    this.app.use(cors());
+    //directorio publico
+    this.app.use(express.static("public"));
   }
 
   routes() {
-    this.app.get("/", (req, res) => {
-      res.send("Hola Mundo");
-    });
+    this.app.use("/api/users", users);
+    this.app.use("/api/admin", admin);
   }
 
   listen() {
