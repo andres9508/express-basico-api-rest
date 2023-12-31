@@ -1,17 +1,22 @@
 import express from "express";
 import cors from "cors";
 import users from "../routes/users.router.js";
-import admin from "../routes/admin.route..js";
+import { dbConecction } from "../db/config.js";
 
 class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
-
+    //conecatar a la base de datos
+    this.connectDB();
     //Middlewares
     this.middlewares();
 
     this.routes();
+  }
+
+  async connectDB() {
+    await dbConecction();
   }
 
   middlewares() {
@@ -25,7 +30,6 @@ class Server {
 
   routes() {
     this.app.use("/api/users", users);
-    this.app.use("/api/admin", admin);
   }
 
   listen() {

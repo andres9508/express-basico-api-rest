@@ -1,4 +1,5 @@
 import { response, request } from "express";
+
 // loscontroladores son solo funciones q se exportan para ser usadas por la ruta
 
 export const getUser = (req = request, res = response) => {
@@ -25,11 +26,10 @@ export const putUser = (req = request, res = response) => {
 
 //obteniendo datos del json en post
 export const postUser = (req = request, res = response) => {
-  const { nombre, edad } = req.body;
+  const body = req.body;
   res.json({
     mss: "users POST success - controller",
-    nombre,
-    edad,
+    body,
   });
 };
 
